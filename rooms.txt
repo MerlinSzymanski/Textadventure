@@ -1,0 +1,6 @@
+ID,Name,Beschreibung,Exits,Items,Gegner
+R1, Die Burg,Das ist eine Burg,norden:R2;osten:R3,,
+R2, Der Wassergraben,Ein wunderschöner Wassergraben,sueden:R1;osten:R4,,
+R3, Das Haus am Graben,Jap... ein Haus,westen:R1;norden:R5,,
+R4, Weiterer Plunder,Plunder,westen:R2;sueden:R5,It1:It2:It3,
+R5, Test,test,sueden:R3;norden:R4,,En1

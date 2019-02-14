@@ -1,0 +1,4 @@
+id,name,beschreibung,angriff,verteidigung,regeneration,sonst
+It1,stab,Ein einfacher Stab,0,1,0,
+It2,dose,Eine Dose Fleisch,0,0,5,
+It3,helm,Ein Eimer aus Blech,2,0,0,
