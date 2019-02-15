@@ -88,3 +88,6 @@ def examine_room():
         for item in current_room.items:
             print(item_location_dic[item])
             
+def get_current_room():
+    global current_room
+    return current_room

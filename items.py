@@ -5,12 +5,12 @@ item_name_dict = {}
 item_place_dic = {}
 
 class Item:
-    def __init__(self,name,description,attack,defense,regeneration):
+    def __init__(self,name,description,takeable,stats,item_funcs):
         self.name = name
         self.description = description
-        self.attack = attack
-        self.defense = defense
-        self.regeneration = regeneration
+        self.takeable = bool(takeable)
+        self.stats = stats
+        self.item_funcs = item_funcs
 
 def get_item_names():
     global item_list
@@ -34,6 +34,8 @@ def get_items(items):
             new = Item(record[1].strip(),record[2].strip(),\
                        record[3].strip(),record[4].strip(),\
                        record[5].strip())
+            if(record[3] == "False"):
+                new.takeable = False
             
             item_list.append(new)
             id_item_dict[record[0].strip()] = new
@@ -59,4 +61,7 @@ def describe_items(name):
 def get_item_loc():
     global item_place_dic
     return item_place_dic
-           
+
+def get_item_name_dict():
+    global item_name_dict
+    return item_name_dict        
