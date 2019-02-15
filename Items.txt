@@ -1,4 +1,5 @@
 id,name,beschreibung,angriff,verteidigung,regeneration,sonst
-It1,stab,Ein einfacher Stab,0,1,0,
+It1,staff,It is a simple staff - made of wood and with strange elements carved intos,0,1,0,
 It2,dose,Eine Dose Fleisch,0,0,5,
 It3,helm,Ein Eimer aus Blech,2,0,0,
+It4,key, Its an old rusty key! Impossible to tell where it belongs,0,0,0,
