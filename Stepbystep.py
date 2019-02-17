@@ -1,71 +1,60 @@
-from rooms import get_rooms, enter_room, execute_go, examine_room
-from items import get_item_names, describe_items, get_item_name_dict
+from rooms import get_rooms, enter_room
 from player import get_player
+from command_interface import check_room_subject, execute_room_command, check_item_subject, execute_item_command,execute_special_cases,check_enemy_subject,execute_enemy_command
 
 import time
+
 list_of_rooms = get_rooms()
 player1 = get_player()
 
 def play():
-    print("*************WELCOME******************")
-    print("You are walking down a path...")
-    time.sleep(1)
+    print_welcome()
     enter_room(list_of_rooms[0])
     while execute_command():
         pass
 
+#
 def execute_command():
     words = read_command()
     
     if(len(words) != 0):
-        if (words[0] in ("go", "enter")):
-            execute_go(words[-1])
+        command = words[0]
+        if(len(words) > 1):
+            subject = words[-1]
+    
+            if(check_room_subject(subject)):
+                execute_room_command(command, subject)
+    
+            elif(check_item_subject(subject)):
+                execute_item_command(command, subject, player1)
             
-        elif (words[0] == "help"):
-            print("Help will come soon... I promise")
-            
-        elif (words[0] == "quit"):
-            print("Until the next time")
-            return False
-        
-        elif (words[0] == "examine"):
-            try:
-                if(words[1] in ("room", "place","floor","area")):
-                    examine_room()
-                elif(words[1] in (get_item_names())):
-                    describe_items(words[1])
-                else:
-                    print("What do you want to examine?")
-            except IndexError:
-                print("what do you want to examine?")
-        
-        elif(words[0] == "take"):
-            if(words[-1] in (get_item_name_dict())):
-                player1.take_item(words[-1].strip())
+            elif(check_enemy_subject(subject)):
+                execute_enemy_command(command,subject,player1)
+
             else:
-                print("What do you want to take?")
+                print("I dont understand: '%s'" % " ".join(words))
         
-        elif(words[0] == "drop"):
-            item_name_dic = get_item_name_dict()
-            try:
-                item = item_name_dic[words[-1].strip()]
-                if(item in player1.inventory):
-                    player1.drop_item(item)
-                else:
-                    print("This Item is not in your inventory")
-            except KeyError:
-                print("There is no Item with that name")
-        
-        elif(words[0] in ("inventory", "i")):
-            player1.show_inventory()
+        elif(command in ("help","quit")):
+            return execute_special_cases(command)
             
         else:
-            print("I dont understand: '%s'" % " ".join(words))
+            print("please type in two words")
+
     return True
 
 def read_command():
     word = input(": ")
     return word.strip(".?!").split(" ")
+
+def print_welcome():
+    print("***Welcome to this little Adventure***")
+    print("")
+    print("please type: 'help' any time to get help with the game\n How to play: Please type in your commands in only two words!\n\n \
+          For example: \n go west\n examine area \n show inventory \n \n If you feel save with a solution you got, try other words before trying another solution\n")
+    print("To end the game type 'quit'. There is no possibility to save the game")
+    print("")
+    print("**************************************")
+    time.sleep(7)
 
 play()
 

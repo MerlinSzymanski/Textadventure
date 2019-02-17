@@ -1,8 +1,11 @@
 from items import get_items, describe_items, get_item_loc
 import time
+from enemies import get_enemy
+
 current_room = None
 room_id_dict = {}
 item_location_dic = get_item_loc()
+enemy_location_dic = {}
 
 class Room:
     def __init__(self, name, description, description_short, description_items,\
@@ -25,7 +28,7 @@ def enter_room(room):
 def describe_room():
     global current_room
     if(current_room.visited == False):
-        print(current_room.name)
+        print(current_room.name + "\n")
         print(current_room.description)
         current_room.visited = True
     else:
@@ -55,10 +58,18 @@ def get_rooms():
         items = record6.split(";")
         if(len(items) > 0):
             new.items = get_items(items)  
-        
+        #add enemy:
+        record7 = record[7].strip()
+        temp = record7.split(":")
+        if(temp[0] not in (""," ")):
+            number_of_enemies = int(temp[0])
+            
+            for i in range(number_of_enemies):
+                new.enemies.append(get_enemy(temp[1]))
+            
     return list1
 
-def execute_go(direction):
+def change_room(direction):
     global current_room
     room_exits = current_room.exits
     try:
@@ -66,12 +77,13 @@ def execute_go(direction):
         room = room_id_dict[request]
     
         if room:
-            print("You go %s" %direction)
+            print("you move from this place")
+            print(" ")
             enter_room(room)
         else:
             raise KeyError
     except:
-        print("You cant go %s." % direction)
+        print("You cant go there, I am sorry")
         
 def examine_room():
     print("You look around")
@@ -87,6 +99,9 @@ def examine_room():
     if (len(current_room.items) != 0):
         for item in current_room.items:
             print(item_location_dic[item])
+    if (len(current_room.enemies)!=0):
+        for enemy in current_room.enemies:
+            print(enemy.first_description.replace("*",""))
             
 def get_current_room():
     global current_room
