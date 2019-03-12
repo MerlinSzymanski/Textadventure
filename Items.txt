@@ -1,7 +1,8 @@
-id,name,beschreibung,wearable,stats,item_defs
-It1,staff,It is a simple staff - made of wood and with strange elements carved intos,True,1:0:0,inspect:You can read a letter "?",
-It2,can,a can full of meat,True,0,5,
-It3,helmet,its just a bucket... but one might waer it,True,0,0,
-It4,key, Its an old rusty key! Impossible to tell where it belongs,True,0,0,
-It6,letter, A white letter with black signs on it. It is really hard for you to tell whats written there. With the help of the moonlight you read the letter: WLAN Code - 6346 9713 7612 3952 4484,False,0,0
-It5,axe,is an almost broken axe... but it might be useful against enemies,True,0,0,
+id,name,beschreibung,wearable,stats,opens
+It1,staff,It is a simple staff - made of wood and with strange elements carved intos,True,1:0:0,,
+It2,can,a can full of meat,True,0,
+It3,helmet,its just a bucket... but one might waer it,True,0,
+It4,key, Its an old rusty key! Impossible to tell where it belongs,True,0,R10
+It6,letter, A white letter with black signs on it. It is really hard for you to tell whats written there. With the help of the moonlight you read the letters: test123,False,0,
+It7,skeleton, An old skeleton... its bones are white. You cant really tell how it died.,False,0,
+It5,axe,is an almost broken axe... but it might be useful against enemies,True,0,
