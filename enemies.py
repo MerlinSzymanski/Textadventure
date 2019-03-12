@@ -12,11 +12,11 @@ class Human_Enemy():
         self.profession = "adventurer"
         self.health = random.randint(7,10)
         self.strength = random.randint(2,4)
-        self.mood = random.randint(1,4)
+        self.mood = random.randint(1,3)
         self.alive = True
             
         #A cool random name from random list
-        name_text = open("names.txt")
+        name_text = open("Texts/names.txt")
         name_list = name_text.readlines()
         global name_enemy_dict
         
@@ -39,7 +39,7 @@ class Human_Enemy():
             self.titel = "it"
         
         #former profession
-        profession_text = open("professions.txt")
+        profession_text = open("Texts/professions.txt")
         profession_list = profession_text.readlines()
         index = random.randint(0,len(profession_list)-1)    
         self.profession = profession_list[index].replace("\n","").strip() 
@@ -111,6 +111,24 @@ def hug_enemy(room):
         print("%s hugs you back" % enemy.titel)
         print("%s is extremely happy" % enemy.titel)
         print(" ")
+
+def hit_enemy(enemy, player1):
+    print("You hit "+enemy.name)
+    print(enemy.name +" hits you back")
+    if(enemy.mood != 1):
+        print(enemy.name +" is now really mad at you")
+        enemy.mood = 1
+    print("")
+    print("Your lifepoints are reduced to "+str(player1.health - enemy.strength))
+    player1.health -= enemy.strength
+
+    if(player1.health <= 0):
+        time.sleep(2)
+        print("You died")
+        print("what a shame")
+        player1.alive = False
+    
+    
 
 def get_enemy_class(room):
     current_room = room

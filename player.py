@@ -7,6 +7,7 @@ class Player:
         self.strength = 2
         self.inventory = []
         self.equipped = []
+        self.alive = True
 
     def take_item(self,name):
         if(len(self.inventory) <= 5):
@@ -14,12 +15,13 @@ class Player:
             item = item_name_dict[name]
             if(item.takeable == True):
                 self.inventory.append(item)
+                get_current_room().items.remove(item)
                 print("you placed the "+str(item.name)+" in your inventory")
                 print("you have "+ str(5- len(self.inventory))+" more free slots in it")
             else:
-                print("You cant take this item")
+                print("dont fool yourself...You cant take this item")
         else:
-            print("Your inventory is full... please remove an item first")
+            print("Your inventory is full... please remove or drop an item first")
     
     def show_inventory(self):
         if(len(self.inventory)==0):
@@ -42,6 +44,19 @@ class Player:
             else:
                 print("This Item is not in your inventory")
         except KeyError:
+            print("There is no Item with that name")
+        
+    def destroy_item(self, name):
+        item_name_dic = get_item_name_dict()
+        try:
+            item = item_name_dic[name]
+            if(item in self.inventory):
+                self.inventory.remove(item)
+                print("You destroyed the "+item.name)
+                print("It wont come back... I hope you didnt need it")
+            else:
+                print("You dont have this Item in your inventory")
+        except:
             print("There is no Item with that name")
         
         

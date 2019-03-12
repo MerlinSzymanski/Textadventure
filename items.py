@@ -5,12 +5,12 @@ item_name_dict = {}
 item_place_dic = {}
 
 class Item:
-    def __init__(self,name,description,takeable,stats,item_funcs):
+    def __init__(self,name,description,takeable,stats,opens):
         self.name = name
         self.description = description
         self.takeable = bool(takeable)
         self.stats = stats
-        self.item_funcs = item_funcs
+        self.opens = opens
 
 def get_item_names():
     global item_list
@@ -26,7 +26,7 @@ def get_items(items):
     global item_name_dict
     
     if(len(item_list) == 0):
-        handle = open("Items.txt","r")
+        handle = open("Texts/Items.txt","r")
         handle.readline()
         for line in handle:
             record = line.split(",")
@@ -52,10 +52,13 @@ def get_items(items):
     return part_list
 
 def describe_items(name):
-    print("You take the Item in your hand and look sharp at it")
-    time.sleep(2)
     global item_name_dict
     item = item_name_dict[name]
+    if(item.takeable == True):
+        print("You take the Item in your hand and look sharp at it")
+    else:
+        print("You come a little closer")
+    time.sleep(2)
     print(item.description)
     
 def get_item_loc():
